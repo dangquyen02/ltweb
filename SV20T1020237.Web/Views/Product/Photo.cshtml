@@ -1,0 +1,89 @@
+﻿@model SV20T1020237.DomainModels.ProductPhoto
+@{
+
+}
+
+<!-- Form (bổ sung or cập nhật ảnh), cần các thông tin
+- Chọn file ảnh 
+- Hiển thị file ảnh 
+- Mô tả ảnh
+- Thứ tự hiển thị (số thứ tự )
+- Có hiển thị ảnh hay không?
+-->
+
+<div class="box box-primary">
+
+    <div class="box-body">
+        <form class="form-horizontal" action="~/Product/SavePhoto" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="hidden" name="PhotoId" value="@Model.PhotoID" />
+                <input type="hidden" name="ProductId" value="@Model.ProductID" />
+                <label class="control-label col-sm-2">Ảnh minh họa:</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="Photo" value="@Model.Photo" />
+                    <input type="file" class="form-control" name="uploadPhoto" accept="image/*"
+                           onchange="document.getElementById('Photo').src = window.URL.createObjectURL(this.files[0])" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-sm-10">
+                    <img id="Photo" src="~/images/products/@Model.Photo" class="img img-bordered" style="width:200px" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Mô tả:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" autofocus name="Description" value="@Model.Description">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Thứ tự hiển thị ảnh</label>
+                <div class="col-sm-10">
+                    <input type="number" min="1" class="form-control" autofocus name="DisplayOrder" value="@Model.DisplayOrder">
+                    @Html.ValidationMessage(nameof(Model.DisplayOrder), new { @style = "color: #f00" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        @* <label>
+                            <input type="checkbox" name="IsHidden" value="@(Model.IsHidden ? "true" : "false")"
+                            @if (Model.IsHidden)
+                            {
+                                <text>checked</text>
+                            }
+                            /> Không hiển thị ảnh
+                        </label> *@
+                        <input type="checkbox" value="true" @(Model.IsHidden ? "checked" : "") name="IsHidden" id="isHiddenCheckbox">Hiển thị ảnh
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Lưu dữ liệu
+                    </button>
+                    <a class="btn btn-default" href="~/Product/Edit/@Model.ProductID">
+                        Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    document.getElementById("isHiddenCheckbox").addEventListener("change", function () {
+        if (this.checked) {
+            this.value = "true";
+        } else {
+            this.value = "false";
+        }
+    });
+</script>

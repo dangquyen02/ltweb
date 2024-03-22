@@ -1,0 +1,49 @@
+﻿@model SV20T1020237.DomainModels.ProductAttribute
+@{
+    //ViewBag.Title = "Thay đổi thuộc tính";
+}
+
+<div class="box box-primary">
+
+    <div class="box-body">
+        <form class="form-horizontal" action="~/Product/SaveAttribute" method="post">
+            <input type="hidden" name="AttributeId" value="@Model.AttributeID" />
+            <input type="hidden" name="ProductId" value="@Model.ProductID" />
+            <div class="form-group">
+                <label class="control-label col-sm-2">Tên thuộc tính:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" autofocus name="AttributeName" value="@Model.AttributeName">
+                    @Html.ValidationMessage(nameof(Model.AttributeName), new { @style = "color: #f00" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Giá trị thuộc tính:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" autofocus name="AttributeValue" value="@Model.AttributeValue">
+                    @Html.ValidationMessage(nameof(Model.AttributeValue), new { @style = "color: #f00" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Thứ tự hiển thị:</label>
+                <div class="col-sm-10">
+                    <input type="number" min="1" class="form-control" autofocus name="DisplayOrder" @Model.DisplayOrder>
+                    @Html.ValidationMessage(nameof(Model.DisplayOrder), new { @style = "color: #f00" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Lưu dữ liệu
+                    </button>
+                    <a class="btn btn-default" href="~/Product/Edit/@Model.ProductID">
+                        Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
