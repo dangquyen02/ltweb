@@ -6,7 +6,7 @@ using SV20T1020237.Web.Models;
 
 namespace SV20T1020237.Web.Controllers
 {
-    [Authorize(Roles = $"{WebUserRoles.Adminnistrator},{WebUserRoles.Employee}")]
+    [Authorize(Roles = $"{WebUserRoles.Administrator},{WebUserRoles.Employee}")]
     public class CategoryController : Controller
     {
         private const int PAGE_SIZE = 20;
@@ -54,7 +54,8 @@ namespace SV20T1020237.Web.Controllers
             ViewBag.Title = "Bổ sung loại hàng";
             Category model = new Category
             {
-                CategoryID = 0
+                CategoryID = 0,
+                Photo = "nophotocategory.png"
             };
 
             return View("Edit", model);
@@ -66,27 +67,38 @@ namespace SV20T1020237.Web.Controllers
             Category? model = CommonDataService.GetCategory(id);
             if (model == null)
                 return RedirectToAction("Index");
-
+            if (string.IsNullOrEmpty(model.Photo))
+            {
+                model.Photo = "nophotocategory.png";
+            }
             return View(model);
         }
 
-        public IActionResult Save(Category data)
+        
+
+        [HttpPost]
+        public IActionResult Save(Category data, IFormFile? uploadPhoto)
         {
             try
             {
-                ViewBag.Title = data.CategoryID == 0 ? "Bổ sung loại hàng" : "Cập nhật thông tin loại hàng";
-                //Kiểm soát đầu vào và đưa các thông báo lỗi vào trong ModelState (nếu có)
+                ViewBag.Title = data.CategoryID == 0 ? "Bổ sung Loại hàng" : "Cập nhật thông tin Loại hàng";
                 if (string.IsNullOrWhiteSpace(data.CategoryName))
-                    ModelState.AddModelError(nameof(data.CategoryName), "Tên không được để trống");    // tên lỗi, thông báo lỗi
-                if (string.IsNullOrWhiteSpace(data.Description))
-                    ModelState.AddModelError(nameof(data.Description), "Mô tả không được để trống");
-
-                //Thông qua thuộc tính IsValid của ModelState để kiểm tra xem có tồn tại lỗi hay không
+                    ModelState.AddModelError(nameof(data.CategoryName), "Tên không được để trống");
                 if (!ModelState.IsValid)
                 {
                     return View("Edit", data);
                 }
-
+                if (uploadPhoto != null)
+                {
+                    string fileName = $"{DateTime.Now.Ticks}_{uploadPhoto.FileName}"; //Tên file sẽ lưu
+                    string folder = Path.Combine(ApplicationContext.HostEnviroment.WebRootPath, "images\\categories");//đường dẫn đến thư mục lưu file
+                    string filePath = Path.Combine(folder, fileName); // đường dẫn đến file cần lưu
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        uploadPhoto.CopyTo(stream);
+                    }
+                    data.Photo = fileName;
+                };
                 if (data.CategoryID == 0)
                 {
                     int id = CommonDataService.AddCategory(data);
@@ -101,7 +113,6 @@ namespace SV20T1020237.Web.Controllers
             {
                 ModelState.AddModelError("Error", "Không thể lưu được dữ liệu. Vui lòng thử lại sau vài phút");
                 return View("Edit", data);
-                //return Content(ex.Message);
             }
         }
         public IActionResult Delete(int id)

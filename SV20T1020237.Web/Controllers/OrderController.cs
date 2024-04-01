@@ -8,7 +8,7 @@ using SV20T1020237.Web.Models;
 
 namespace SV20T1020237.Web.Controllers
 {
-    [Authorize(Roles = $"{WebUserRoles.Employee}")]
+    [Authorize(Roles = $"{WebUserRoles.Administrator}")]
     public class OrderController : Controller
     {
         //Số dòng trên 1 trang khi hiển thị danh sách đơn hàng
@@ -24,9 +24,6 @@ namespace SV20T1020237.Web.Controllers
         //Tên biến session dùng để lưu giỏ hàng
         private const string SHOPPING_CART = "shopping_cart";
 
-
-        private const string SUCCESS_MESSAGE = "SuccessMessage";
-        private const string ERROR_MESSAGE = "ErrorMessage";
 
         /// <summary>
         /// Giao diện tìm kiếm và hiển thị kết quả tìm kiếm đơn hàng
@@ -104,21 +101,7 @@ namespace SV20T1020237.Web.Controllers
             return RedirectToAction("Details", new { id });
             if (id <= 0)
                 return RedirectToAction("Index");
-
-            //if (OrderDataService.GetOrder(id) == null)
-            //{
-            //    return RedirectToAction("Index");
-
-            //}
-            //if (!OrderDataService.AcceptOrder(id))
-            //{
-            //    TempData[ERROR_MESSAGE] = "Thao tác Không thành công";
-            //    return RedirectToAction($"Details/{id}");
-            //}
-
-            //OrderDataService.AcceptOrder(id);
-            //TempData[SUCCESS_MESSAGE] = "Đơn hàng đã được duyệt";
-            //return RedirectToAction($"Details/{id}");
+            
         }
 
         /// <summary>

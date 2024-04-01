@@ -24,9 +24,10 @@ namespace SV20T1020237.DataLayers.SqlServer
                             else
                                 begin
                                     insert into Employees(FullName,BirthDate,Address,Phone,Email,Photo,IsWorking,Password, RoleNames)
-                                    values(@FullName,@BirthDate,@Address,@Phone,@Email,@Photo,@IsWorking,1, @RoleNames);
+                                    values(@FullName,@BirthDate,@Address,@Phone,@Email,@Photo,@IsWorking,111, @RoleNames);
                                     select @@identity;
                                 end";   // @@identity khong phai tham so ma la bien
+                                // Mật khẩu mặc định lúc thêm là 111
                 var parameters = new
                 {
                     FullName = data.FullName ?? "",

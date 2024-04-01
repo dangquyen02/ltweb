@@ -40,6 +40,23 @@ namespace SV20T1020237.BusinessLayers
         {
             return provinceDB.List().ToList();
         }
+        public static List<Supplier> ListOfSuppliers()
+        {
+            return supplierDB.List().ToList();
+        }
+
+        public static List<Category> ListOfCategories()
+        {
+            return categoryDB.List().ToList();
+        }
+        public static List<Customer> ListOfCustomers()
+        {
+            return customerDB.List().ToList();
+        }
+        public static List<Shipper> ListOfShippers()
+        {
+            return shipperDB.List().ToList();
+        }
 
         #region Nhà cung cấp
         /// <summary>
@@ -192,20 +209,7 @@ namespace SV20T1020237.BusinessLayers
             rowCount = shipperDB.Count(searchValue);
             return shipperDB.List(page, pageSize, searchValue).ToList();
         }
-        /// <summary>
-        /// tìm kiếm và lấy danh sách người giao hàng ( không phân trang)
-        /// </summary>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        //public static List<Shipper> ListOfShippers(String searchValue)
-        //{
-
-        //    return shipperDB.List(1, 0, searchValue).ToList();
-        //}
-        public static List<Shipper> ListOfShippers()
-        {
-            return shipperDB.List().ToList();
-        }
+        
         /// <summary>
         /// Lấy thông tin của 1 người giao hàng theo mã người giao hàng
         /// </summary>

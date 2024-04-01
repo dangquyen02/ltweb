@@ -9,7 +9,8 @@
         <form id="formSearch" action="~/Product/Search" method="get" data-container="#searchResult">
             <div class="row">
                 <div class="col-sm-3">
-                    <select class="form-control " name="category">
+                    @* @Html.DropDownListFor(m => m.CategoryID, SelectListHelper.Categories(), new {@class = "form-control select2"}) *@
+                    <select class="form-control " name="@nameof(Model.CategoryID)">
                         <option>-- Loại hàng --</option>
                         @foreach (var item in SV20T1020237.BusinessLayers.CommonDataService.ListOfCategories(out var rowCount, 1, 0, ""))
                         {
@@ -26,7 +27,7 @@
                     </select>
                 </div>
                 <div class="col-sm-3">
-                    <select class="form-control " name="suplier">
+                    <select class="form-control " name="@nameof(Model.SupplierID)">
                         <option>-- Nhà cung cấp --</option>
                         @foreach (var item in SV20T1020237.BusinessLayers.CommonDataService.ListOfSuppliers(out var rowCount, 1, 0, ""))
                         {

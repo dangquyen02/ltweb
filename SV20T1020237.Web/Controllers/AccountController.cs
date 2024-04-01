@@ -53,16 +53,7 @@ namespace SV20T1020570.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //public ActionResult ChangePassword(string userName, string oldPassword, string newPassword)
-        //{
-        //    var userAccount = UserAccountService.ChangePassword(userName, oldPassword, newPassword);
-        //    ViewBag.UserName = userAccount;
-        //    return View();
-
-        //}
-
-
-        public IActionResult ChangePassword(string userName, string oldPassword, string newPassword)
+        public IActionResult ChangePassword(string userName, string oldPassword, string newPassword, string confirmPassword)
         {
             if (HttpContext.Request.Method == "POST")
             {
@@ -77,14 +68,35 @@ namespace SV20T1020570.Web.Controllers
                     ModelState.AddModelError("NewPassword", "Vui lòng nhập mật khẩu mới.");
                     return View();
                 }
+                if (string.IsNullOrEmpty(confirmPassword))
+                {
+                    ViewBag.NewPassword = newPassword;
+                    ViewBag.OldPassword = oldPassword;
+                    ModelState.AddModelError("ConfirmPassword", "Vui lòng nhập lại mật khẩu mới.");
+                    return View();
+                }
                 if (UserAccountService.CheckPassword(userName, newPassword))
                 {
                     ViewBag.OldPassword = oldPassword;
                     ModelState.AddModelError("NewPassword", "Mật khẩu mới không được trùng với mật khẩu cũ");
                     return View();
                 }
+                if (newPassword.Length < 3)
+                {
+                    ViewBag.OldPassword = oldPassword;
+                    ModelState.AddModelError("LenPassword", "Mật khẩu mới có ít nhất 3 kí tự");
+                    return View();
+                }
+                if (newPassword != confirmPassword)
+                {
+                    ViewBag.NewPassword = newPassword;
+                    ViewBag.OldPassword = oldPassword;
+                    ModelState.AddModelError("ConfirmPassword", "Mật khẩu không phù hợp. Vui lòng nhập lại!");
+                    return View();
+                }
                 UserAccountService.ChangePassword(userName, oldPassword, newPassword);
-                return RedirectToAction("Index", "Home");
+                ViewBag.ChangePasswordSuccess = true;
+                return View();
             }
 
             return View();

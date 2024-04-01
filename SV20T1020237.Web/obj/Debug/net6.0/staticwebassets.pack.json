@@ -17,6 +17,46 @@
       "PackagePath": "staticwebassets\\images\\avt.jpg"
     },
     {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472339115164813_meo.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472339115164813_meo.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472339706614650_meo1.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472339706614650_meo1.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472344074020263_meo1.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472344074020263_meo1.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472344301303751_meo1.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472344301303751_meo1.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472346173124340_meo.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472346173124340_meo.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472346299969941_meo1.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472346299969941_meo1.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472347137941915_meo.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472347137941915_meo.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472348453443777_meo.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472348453443777_meo.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\638472348767164516_meo1.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\638472348767164516_meo1.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\categories\\nophotocategory.png",
+      "PackagePath": "staticwebassets\\images\\categories\\nophotocategory.png"
+    },
+    {
       "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\employees\\638452313741358928_banana.png",
       "PackagePath": "staticwebassets\\images\\employees\\638452313741358928_banana.png"
     },
@@ -43,6 +83,22 @@
     {
       "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\employees\\638467202781088211_avt.jpg",
       "PackagePath": "staticwebassets\\images\\employees\\638467202781088211_avt.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\employees\\638467204007124466_avt.jpg",
+      "PackagePath": "staticwebassets\\images\\employees\\638467204007124466_avt.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\employees\\638472299654825692_BeautyPlus_20240303204815406_save.jpg",
+      "PackagePath": "staticwebassets\\images\\employees\\638472299654825692_BeautyPlus_20240303204815406_save.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\employees\\638472299968396262_t6.JPG",
+      "PackagePath": "staticwebassets\\images\\employees\\638472299968396262_t6.JPG"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\employees\\638472300989358193_meo1.jpg",
+      "PackagePath": "staticwebassets\\images\\employees\\638472300989358193_meo1.jpg"
     },
     {
       "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\employees\\nophoto.png",
@@ -91,6 +147,22 @@
     {
       "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\products\\638466239685794621_banana.png",
       "PackagePath": "staticwebassets\\images\\products\\638466239685794621_banana.png"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\products\\638467533813898115_t1.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\638467533813898115_t1.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\products\\638472311123109565_meo.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\638472311123109565_meo.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\products\\638472314579470424_meo1.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\638472314579470424_meo1.jpg"
+    },
+    {
+      "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\products\\638472318200506951_meo1.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\638472318200506951_meo1.jpg"
     },
     {
       "Id": "D:\\LT_WEB\\SV20T1020237\\SV20T1020237.Web\\wwwroot\\images\\products\\mac.jpg",

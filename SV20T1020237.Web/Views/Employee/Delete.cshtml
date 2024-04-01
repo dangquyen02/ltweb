@@ -51,7 +51,7 @@
             <div class="form-group">
                 <div class="col-lg-offset-2 col-sm-10">
                     <input type="hidden" name="Photo" value="@Model.Photo" />
-                    <img id="Photo" src="~/images/employees/@Model.Photo" class="img img-bordered" style="width:200px" />
+                    <img id="Photo" src="~/images/employees/@(string.IsNullOrWhiteSpace(Model.Photo) ? "nophoto.png" : Model.Photo)" class="img img-bordered" style="width:200px" />
                 </div>
             </div>
 

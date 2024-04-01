@@ -46,11 +46,12 @@ namespace SV20T1020237.BusinessLayers
         /// <param name="maxPrice"></param>
         /// <returns></returns>
         public static List<Product> ListProducts(out int rowCount, int page = 1, int pageSize = 0,
-                                            string searchValue = "", int categoryId = 0, int supplierId = 0,
-                                            decimal minPrice = 0, decimal maxPrice = 0)
+                                        string searchValue = "", int categoryId = 0, int supplierId = 0,
+                                        decimal minPrice = 0, decimal maxPrice = 0)
         {
-            rowCount = productDB.Count(searchValue);
+            rowCount = productDB.Count(searchValue, categoryId, supplierId, minPrice, maxPrice);
             return productDB.List(page, pageSize, searchValue, categoryId, supplierId, minPrice, maxPrice).ToList();
+
         }
 
         /// <summary>

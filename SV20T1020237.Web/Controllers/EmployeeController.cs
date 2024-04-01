@@ -7,7 +7,7 @@ using System.Drawing.Printing;
 
 namespace SV20T1020237.Web.Controllers
 {
-    [Authorize(Roles = $"{WebUserRoles.Employee}")]
+    [Authorize(Roles = $"{WebUserRoles.Administrator}")]
     public class EmployeeController : Controller
     {
         private const int PAGE_SIZE = 12;
@@ -58,7 +58,8 @@ namespace SV20T1020237.Web.Controllers
             {
                 EmployeeID = 0,
                 BirthDate = new DateTime(1990, 1, 1),
-                Photo = "nophoto.png"
+                Photo = "nophoto.png",
+                RoleNames = "employee"
             };
             return View("Edit", model);// tên view sử dụng
         }
@@ -152,7 +153,7 @@ namespace SV20T1020237.Web.Controllers
             var model = CommonDataService.GetEmployee(id);
             if (model == null)
             {
-                return RedirectToAction("Index");
+                return View("Index");
             }
 
             ViewBag.AllowDelete = !CommonDataService.IsUsedEmployee(id);

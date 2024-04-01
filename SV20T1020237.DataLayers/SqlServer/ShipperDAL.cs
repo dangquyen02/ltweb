@@ -124,7 +124,7 @@ namespace SV20T1020237.DataLayers.SqlServer
 	                            where	(@searchValue = N'') or (ShipperName like @searchValue)
                             ) as t
                             where  (@pageSize = 0)
-or (RowNumber between (@page - 1) * @pageSize + 1 and @page * @pageSize)
+                            or (RowNumber between (@page - 1) * @pageSize + 1 and @page * @pageSize)
                             order by RowNumber";
                 var parameters = new
                 {

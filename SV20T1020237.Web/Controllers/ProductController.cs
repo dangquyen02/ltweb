@@ -7,7 +7,7 @@ using System.Drawing.Printing;
 
 namespace SV20T1020237.Web.Controllers
 {
-    [Authorize (Roles =$"{WebUserRoles.Adminnistrator}, {WebUserRoles.Employee}")]
+    [Authorize (Roles =$"{WebUserRoles.Administrator}, {WebUserRoles.Employee}")]
     public class ProductController : Controller
     {
         private const int PAGE_SIZE = 20;
@@ -162,7 +162,9 @@ namespace SV20T1020237.Web.Controllers
                     ProductPhoto model = new ProductPhoto()
                     {
                         ProductID = id,
-                        PhotoID = 0
+                        PhotoID = 0,
+                        Photo = "nophotoproduct.png",
+                        IsHidden = true,
                     };
                     ViewBag.Title = "Bổ sung ảnh";
                     return View(model);
@@ -213,8 +215,19 @@ namespace SV20T1020237.Web.Controllers
                     ModelState.AddModelError(nameof(data.AttributeName), "Tên không được để trống");
                 if (string.IsNullOrWhiteSpace(data.AttributeValue))
                     ModelState.AddModelError(nameof(data.AttributeValue), "Giá trị không được để trống");
-                if (data.DisplayOrder <= 0)
+                if (string.IsNullOrWhiteSpace(data.DisplayOrder.ToString()) || data.DisplayOrder.ToString() == "0")
                     ModelState.AddModelError(nameof(data.DisplayOrder), "Vui lòng nhập vị trí của ảnh");
+                if (data.DisplayOrder < 1)
+                    ModelState.AddModelError(nameof(data.DisplayOrder), "Vui lòng nhập vị trí của ảnh lớn hơn 1");
+                List<ProductAttribute> listAttributes = ProductDataService.ListAttributes(data.ProductID);
+                foreach (ProductAttribute item in listAttributes)
+                {
+                    if (data.DisplayOrder == item.DisplayOrder && data.AttributeID != item.AttributeID)
+                    {
+                        ModelState.AddModelError(nameof(data.DisplayOrder), $"Thứ tự hiển thị {data.DisplayOrder} không hợp lệ");
+                        break;
+                    }
+                }
 
                 //Thông qua thuộc tính IsValid của ModelState  để kiểm tra xem có tồn tại lỗi hay không
                 if (!ModelState.IsValid)
@@ -244,9 +257,19 @@ namespace SV20T1020237.Web.Controllers
             {
                 ViewBag.Title = data.PhotoID == 0 ? "Bổ sung ảnh" : "Thay đổi ảnh";
                 //Kiểm tra đầu vào và đưa các thông báo lỗi vào trong ModelState (nếu có)
-                if (data.DisplayOrder <= 0)
+                if (string.IsNullOrWhiteSpace(data.DisplayOrder.ToString()) || data.DisplayOrder.ToString() == "0")
                     ModelState.AddModelError(nameof(data.DisplayOrder), "Vui lòng nhập vị trí của ảnh");
-
+                if (data.DisplayOrder < 1)
+                    ModelState.AddModelError(nameof(data.DisplayOrder), "Vui lòng nhập vị trí của ảnh lớn hơn 1");
+                List<ProductPhoto> listPhotos = ProductDataService.ListPhotos(data.ProductID);
+                foreach (ProductPhoto item in listPhotos)
+                {
+                    if (data.DisplayOrder == item.DisplayOrder && data.PhotoID != item.PhotoID)
+                    {
+                        ModelState.AddModelError(nameof(data.DisplayOrder), $"Thứ tự hiển thị {data.DisplayOrder} không hợp lệ");
+                        break;
+                    }
+                }
                 //Thông qua thuộc tính IsValid của ModelState  để kiểm tra xem có tồn tại lỗi hay không
                 if (!ModelState.IsValid)
                 {

@@ -119,13 +119,12 @@ namespace SV20T1020237.Web
         //TODO: Định nghĩa các role được sử dụng trong hệ thống tại đây
 
         [Display(Name = "Quản trị hệ thống")]
-        public const string Adminnistrator = "admin";
+        public const string Administrator = "admin";
 
         [Display(Name = "Nhân viên ")]
         public const string Employee = "employee";
 
         [Display(Name = "Khách hàng")]
-
         public const string Customer = " customer ";
     }
     /// <summary>

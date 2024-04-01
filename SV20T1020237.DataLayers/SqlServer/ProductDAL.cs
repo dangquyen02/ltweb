@@ -88,36 +88,35 @@ namespace SV20T1020237.DataLayers.SqlServer
             }
             return id;
         }
-
+        
         public int Count(string searchValue = "", int categoryID = 0, int supplierID = 0, decimal minPrice = 0, decimal maxPrice = 0)
         {
             int count = 0;
-            if (searchValue != "")
+            if (!string.IsNullOrEmpty(searchValue))
+            {
                 searchValue = "%" + searchValue + "%";
+            }
             using (var connection = OpenConnection())
             {
-                var sql = @"SELECT  COUNT(*)
-                                    FROM    Products 
-                                    WHERE   (@SearchValue = N'' OR ProductName LIKE @SearchValue)
-                                        AND (@CategoryID = 0 OR CategoryID = @CategoryID)
-                                        AND (@SupplierID = 0 OR SupplierID = @SupplierID)
+                var sql = @"SELECT COUNT(*) 
+                            FROM Products 
+                            WHERE (ProductName LIKE @SearchValue OR @SearchValue = N'')
+                                AND (CategoryID = @CategoryID OR @CategoryID = 0)
+                                AND (SupplierID = @SupplierID OR @SupplierID = 0)
+                                AND (Price >= @MinPrice OR @MinPrice = 0)
+                                AND (Price <= @MaxPrice OR @MaxPrice = 0)";
 
-                                        and (Price >= @MinPrice)
-                                        and (@MaxPrice <= 0 or Price <= @MaxPrice)";
                 var parameters = new
                 {
-                    SearchValue = searchValue ?? "",
+                    searchValue = searchValue ?? "",
                     CategoryID = categoryID,
                     SupplierID = supplierID,
-                    minPrice = minPrice,
-                    maxPrice = maxPrice
+                    MinPrice = minPrice,
+                    MaxPrice = maxPrice
                 };
-
-                count = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
-                connection.Close();
+                count = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: CommandType.Text);
             }
             return count;
-            //throw new NotImplementedException();
         }
 
         public bool Delete(int productID)
@@ -294,7 +293,7 @@ namespace SV20T1020237.DataLayers.SqlServer
                 var sql = @"SELECT	*
 	                                FROM	ProductAttributes 
 	                                WHERE   ProductID = @ProductID
-                                    ORDER BY DisplayOrder;";
+                                    ORDER BY DisplayOrder ASC;";
                 var parameters = new
                 {
                     ProductID = productID,
@@ -314,8 +313,8 @@ namespace SV20T1020237.DataLayers.SqlServer
             {
                 var sql = @"SELECT	*
                                  FROM	ProductPhotos 
-                                 WHERE   ProductID = @ProductID";
-                                    //ORDER BY DisplayOrder;";
+                                 WHERE   ProductID = @ProductID
+                                 Order by DisplayOrder ASC;";
                 var parameters = new
                 {
                     ProductID = productID,

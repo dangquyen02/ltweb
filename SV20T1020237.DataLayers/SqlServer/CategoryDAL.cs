@@ -23,13 +23,15 @@ namespace SV20T1020237.DataLayers.SqlServer
             int id = 0;
             using (var connection = OpenConnection())
             {
-                var sql = @"INSERT INTO Categories(CategoryName, Description)
-                                    VALUES(@CategoryName, @Description);
+                var sql = @"INSERT INTO Categories(Photo, CategoryName, Description)
+                                    VALUES(@Photo, @CategoryName, @Description);
                                     SELECT SCOPE_IDENTITY()";
                 var parameter = new
                 {
+                    Photo = data.Photo,
                     CategoryName = data.CategoryName,
                     Description = data.Description
+                    
                 };
                 id = connection.ExecuteScalar<int>(sql: sql, param: parameter, commandType: System.Data.CommandType.Text);
                 connection.Close();
@@ -145,15 +147,20 @@ namespace SV20T1020237.DataLayers.SqlServer
             using (var connection = OpenConnection())
             {
                 var sql = @"update Categories 
-                            set CategoryName = @categoryName,
+                            set 
+                                Photo = @Photo,
+                                CategoryName = @categoryName,
                                 Description = @description
+                                
                             where CategoryId = @categoryId
                                 ";
                 var parameters = new
                 {
+                    Photo = data.Photo ?? "",
                     CategoryId = data.CategoryID,
                     CategoryName = data.CategoryName ?? "",
                     Description = data.Description ?? ""
+                    
                 };
                 result = connection.Execute(sql: sql, param: parameters, commandType: System.Data.CommandType.Text) > 0;
                 connection.Close();

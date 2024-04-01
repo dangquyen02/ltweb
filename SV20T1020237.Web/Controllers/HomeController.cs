@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace SV20T1020237.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = $"{WebUserRoles.Administrator}, {WebUserRoles.Employee}")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
